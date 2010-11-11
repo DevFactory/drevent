@@ -1,5 +1,7 @@
 package com.drevent;
 
+import com.drevent.net.FacebookHttpClient;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -20,7 +22,7 @@ public class DreventActivity extends Activity {
         final Button findBtn = (Button) findViewById(R.id.find_btn);
         findBtn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				//new SearchEventsTask().execute();
+				new SearchEventsTask().execute();
 			}
 		});
     }
@@ -38,11 +40,9 @@ public class DreventActivity extends Activity {
 		
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			try {
-				// load list here
-			} catch (Exception e) {
-				Log.e(TAG, e.getMessage());
-			}
+			Log.d(TAG, "Loading events.");
+			
+			new FacebookHttpClient().events("", null);
 			return null;
 		}
 		
@@ -50,6 +50,7 @@ public class DreventActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			progressDialog.dismiss();
 
+			Log.d(TAG, "Events have been loaded. Task finished!");
 			//Intent i = new Intent(this, TopRingtones.class);
 			//startActivity(i);
 		}
