@@ -16,10 +16,13 @@ import android.widget.Toast;
 
 import com.drevent.domain.Event;
 import com.drevent.net.FacebookHttpClient;
+import com.drevent.net.HttpClient;
 
 public class DreventActivity extends Activity {
 
 	public static final String TAG = "Drevent";
+
+	private HttpClient httpClient;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
