@@ -44,10 +44,15 @@ public class FacebookHttpClient implements HttpClient {
 
 	private static final String FACEBOOK_SEARCH_PATH = "/search";
 
+	public static ArrayList<Event> cachedData = new ArrayList<Event>();
+	
 	/**
 	 * Requests to Faceboook API to et events for specified location.
 	 */
 	public ArrayList<Event> events(final String event, final Location location) {
+		// clear
+		cachedData.clear();
+		
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("q", event));
@@ -81,6 +86,10 @@ public class FacebookHttpClient implements HttpClient {
 			Log.e("http", exc.getMessage());
 			exc.printStackTrace();
 		}
+		
+		// cache
+		cachedData = events;
+		
 		return events;
 	}
 
