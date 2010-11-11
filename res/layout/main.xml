@@ -4,9 +4,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+
+	<TextView
+		android:text="@string/query_field_title"
+		android:id="@+id/query_field_title" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="10px"
+		android:textSize="18px"
+		android:textStyle="bold"
+		android:textColor="#FFF" />
+
+    <EditText android:id="@+id/query" 
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+              android:background="@android:drawable/editbox_background"/>
+              
+	<Button android:id="@+id/find_btn" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="@string/find_btn_lbl" android:layout_gravity="center_horizontal"/>
 </LinearLayout>

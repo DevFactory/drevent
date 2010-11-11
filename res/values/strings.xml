@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, DreventActivity!</string>
     <string name="app_name">Drevent</string>
+    
+    <!-- Titles -->
+    <string name="query_field_title">Fill filter term or leave empty for all results:</string>
+    
+    <!-- Labels -->
+    <string name="find_btn_lbl">Find</string>
+    <string name="find_events_from_facebook_lbl">Find Facebook Events</string>
+    <string name="searching_events_progress_label">Searching events...</string>
+    <string name="events_list_lbl">Events List</string>
 </resources>
