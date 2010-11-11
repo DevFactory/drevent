@@ -50,9 +50,11 @@ public class FacebookHttpClient implements HttpClient, LocationListener {
 
 	private static final String FACEBOOK_SEARCH_PATH = "/search";
 
-	private Context context;
+	public static ArrayList<Event> cachedData = new ArrayList<Event>();
 
 	private ArrayList<Event> events;
+
+	private Context context;
 
 	public FacebookHttpClient(final Context context) {
 		this.context = context;
@@ -150,6 +152,9 @@ public class FacebookHttpClient implements HttpClient, LocationListener {
 			Log.e("http", exc.getMessage());
 			exc.printStackTrace();
 		}
+
+		// cache
+		cachedData = events;
 	}
 
 	private ArrayList<Event> parseJsonEvents(final InputStream stream)
@@ -196,7 +201,7 @@ public class FacebookHttpClient implements HttpClient, LocationListener {
 		event.setLocationName(eventObj.getString("location"));
 		event.setStartTime(eventObj.getString("start_time"));
 		event.setEndTime(eventObj.getString("end_time"));
-		event.setDescription(eventObj.getString("description"));
+		//event.setDescription(eventObj.getString("description"));
 		return event;
 	}
 }
