@@ -44,10 +44,10 @@ public class EntryItemAdapter extends ArrayAdapter<Event> {
 			((TextView)entryView.findViewById(R.id.event_entry_location)).setText(entry.getLocationName());
 		}
 		if (entry.getStartTime() != null) {
-			((TextView)entryView.findViewById(R.id.event_entry_start_time)).setText(entry.getStartTime());
+			((TextView)entryView.findViewById(R.id.event_entry_start_time)).setText("Starts: " + entry.getStartTime());
 		}
 		if (entry.getEndTime() != null) {
-			((TextView)entryView.findViewById(R.id.event_entry_end_time)).setText(entry.getEndTime());
+			((TextView)entryView.findViewById(R.id.event_entry_end_time)).setText("Ends: " + entry.getEndTime());
 		}
 
 		return entryView;

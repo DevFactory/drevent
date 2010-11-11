@@ -3,7 +3,7 @@
     <string name="app_name">Drevent</string>
     
     <!-- Titles -->
-    <string name="query_field_title">Fill filter term or leave empty for all results:</string>
+    <string name="query_field_title">Search for specific event (or leave empty):</string>
     
     <!-- Labels -->
     <string name="find_btn_lbl">Find</string>
