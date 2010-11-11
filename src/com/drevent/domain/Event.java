@@ -13,6 +13,7 @@ public class Event {
 	private String startTime;
 	private String endTime;
 	private String locationName;
+	private String description;
 	private String id;
 
 	public Event() {
@@ -20,13 +21,14 @@ public class Event {
 	}
 
 	public Event(String id, String name, String startTime, String endTime,
-			String locationName) {
+			String locationName, String description) {
 		this();
 		this.id = id;
 		this.name = name;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.locationName = locationName;
+		this.description = description;
 	}
 
 	public String getName() {
@@ -67,6 +69,14 @@ public class Event {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

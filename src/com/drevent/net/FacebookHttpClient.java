@@ -128,6 +128,7 @@ public class FacebookHttpClient implements HttpClient {
 		event.setLocationName(eventObj.getString("location"));
 		event.setStartTime(eventObj.getString("start_time"));
 		event.setEndTime(eventObj.getString("end_time"));
+		event.setDescription(eventObj.getString("description"));
 		return event;
 	}
 }
