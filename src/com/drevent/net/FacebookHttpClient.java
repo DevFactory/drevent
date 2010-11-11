@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,16 +24,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.drevent.domain.Event;
-import com.drevent.domain.Location;
 
 /**
  * @author Izzet_Mustafayev
  * 
  */
-public class FacebookHttpClient implements HttpClient {
+public class FacebookHttpClient implements HttpClient, LocationListener {
 
 	private static final String SCHEMA = "https";
 
@@ -44,13 +50,76 @@ public class FacebookHttpClient implements HttpClient {
 
 	private static final String FACEBOOK_SEARCH_PATH = "/search";
 
+	private Context context;
+
+	private ArrayList<Event> events;
+
+	public FacebookHttpClient(final Context context) {
+		this.context = context;
+	}
+
 	/**
 	 * Requests to Faceboook API to et events for specified location.
 	 */
-	public ArrayList<Event> events(final String event, final Location location) {
-		ArrayList<Event> events = new ArrayList<Event>();
+	public void events(final String event) {
+		events = new ArrayList<Event>();
+
+		String eventName = event;
+		if (null == eventName || "".equals(eventName)) {
+			LocationManager locationManager;
+			locationManager = (LocationManager) context
+					.getSystemService(Context.LOCATION_SERVICE);
+
+			locationManager.requestLocationUpdates(
+					LocationManager.GPS_PROVIDER, 0, 0, this);
+
+		} else {
+			requestEvents(eventName, events);
+		}
+
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		if (null != provider) {
+
+		}
+	}
+
+	public void onProviderEnabled(String provider) {
+		if (null != provider) {
+
+		}
+	}
+
+	public void onProviderDisabled(String provider) {
+		if (null != provider) {
+
+		}
+
+	}
+
+	public void onLocationChanged(android.location.Location location) {
+
+		List<Address> addresses;
+		try {
+			addresses = new Geocoder(context).getFromLocation(
+					location.getLatitude(), location.getLongitude(), 1);
+			Address address = addresses.get(0);
+			requestEvents(address.getLocality(), events);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.e("http", e.getMessage());
+		}
+
+	}
+
+	/**
+	 * @param eventName
+	 * @param events
+	 */
+	private void requestEvents(String eventName, ArrayList<Event> events) {
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("q", event));
+		params.add(new BasicNameValuePair("q", eventName));
 		params.add(new BasicNameValuePair("type", "event"));
 		params.add(new BasicNameValuePair("center", "50.43,30.27"));
 		params.add(new BasicNameValuePair("distance", "1000"));
@@ -81,7 +150,6 @@ public class FacebookHttpClient implements HttpClient {
 			Log.e("http", exc.getMessage());
 			exc.printStackTrace();
 		}
-		return events;
 	}
 
 	private ArrayList<Event> parseJsonEvents(final InputStream stream)

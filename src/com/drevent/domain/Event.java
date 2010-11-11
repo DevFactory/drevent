@@ -3,11 +3,14 @@
  */
 package com.drevent.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Izzet_Mustafayev
  * 
  */
-public class Event {
+public class Event implements Parcelable {
 
 	private String name;
 	private String startTime;
@@ -108,6 +111,16 @@ public class Event {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
